@@ -1,5 +1,5 @@
 # This is the R script created for Exploratory Data Analysis Course Project 1
-# Its goal is to reproduce plot2.png using Global Active Power data over a
+# Its goal is to reproduce plot3.png using Global Active Power data over a
 # 2-day period in February, 2007 in the Electric Power consumption data set.
 
 # The script assumes that the input data set is in the working directory.
@@ -33,13 +33,18 @@ powercons$Date <- as.Date(powercons$Time)
 # It might be necessary to set the Time Locale on some systems
 Sys.setlocale("LC_TIME", "C")
 
-# Open png graphics device to construct plot2.png as 480x480 PNG image
-png(filename="plot2.png", width=480, height=480)
+# Open png graphics device to construct plot3.png as 480x480 PNG image
+png(filename="plot3.png", width=480, height=480)
 
-# Plot Global_active_power as a function of Time to reconstruct plot2
-plot(powercons$Time, powercons$Global_active_power, type="l", xlab="",
-     ylab="Global Active Power (kilowatts)")
+# Plot Sub_metering variables as a function of Time to reconstruct plot3
+plot(powercons$Time, powercons$Sub_metering_1, type="l", xlab="", 
+     ylab="Energy sub metering")
+lines(powercons$Time, powercons$Sub_metering_2, col="red")
+lines(powercons$Time, powercons$Sub_metering_3, col="blue")
+
+# Add legend on top right
+legend("topright", lwd=1, col=c("black", "red", "blue"),
+       legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 
 # Close the png graphics device
 dev.off()
-
