@@ -30,7 +30,8 @@ powercons <- read.csv.sql(dataFile, sep=';',
 powercons$Time <- strptime(paste(powercons$Date, powercons$Time), format="%d/%m/%Y %H:%M:%S")
 powercons$Date <- as.Date(powercons$Time)
 
-# It might be necessary to set the Time Locale on some systems
+# It might be necessary to set the Time Locale on some systems to use English
+# This is OS platform specific - tested on Ubuntu Linux 14.04 LTS and R 3.1.1
 Sys.setlocale("LC_TIME", "C")
 
 # Open png graphics device to construct plot3.png as 480x480 PNG image
@@ -48,3 +49,7 @@ legend("topright", lwd=1, col=c("black", "red", "blue"),
 
 # Close the png graphics device
 dev.off()
+
+# Please ignore the "closing unused connection" warnings that might
+# be displayed on some platforms. No solution found so far:
+# https://class.coursera.org/exdata-005/forum/thread?thread_id=42

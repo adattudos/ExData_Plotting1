@@ -30,7 +30,8 @@ powercons <- read.csv.sql(dataFile, sep=';',
 powercons$Time <- strptime(paste(powercons$Date, powercons$Time), format="%d/%m/%Y %H:%M:%S")
 powercons$Date <- as.Date(powercons$Time)
 
-# It might be necessary to set the Time Locale on some systems
+# It might be necessary to set the Time Locale on some systems to use English
+# This is OS platform specific - tested on Ubuntu Linux 14.04 LTS and R 3.1.1
 Sys.setlocale("LC_TIME", "C")
 
 # Open png graphics device to construct plot4.png as 480x480 PNG image
@@ -56,8 +57,15 @@ plot(powercons$Time, powercons$Voltage, type="l", xlab="datetime",
      ylab="Voltage")
 
 # Plot 4d: Global_reactive_power as a function of Time
+# Note that it is due to custom line width it is challenging
+# to reconstruct the exact image. However I found lwd=0.6
+# to work well on my system (Ubuntu Linux 14.04 LTS and R 3.1.1)
 plot(powercons$Time, powercons$Global_reactive_power, type="l", lwd=0.6, xlab="datetime",
      ylab="Global_reactive_power")
 
 # Close the png graphics device
 dev.off()
+
+# Please ignore the "closing unused connection" warnings that might
+# be displayed on some platforms. No solution found so far:
+# https://class.coursera.org/exdata-005/forum/thread?thread_id=42

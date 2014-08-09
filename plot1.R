@@ -36,5 +36,6 @@ hist(powercons$Global_active_power, col="red", main="Global Active Power",
 # Close the png graphics device
 dev.off()
 
-# Close all connections
-on.exit(closeAllConnections())
+# Please ignore the "closing unused connection" warnings that might
+# be displayed on some platforms. No solution found so far:
+# https://class.coursera.org/exdata-005/forum/thread?thread_id=42
